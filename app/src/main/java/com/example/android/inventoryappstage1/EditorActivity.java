@@ -19,6 +19,7 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.android.inventoryappstage1.data.InventoryContract.InventoryEntry;
@@ -46,6 +47,7 @@ public class EditorActivity extends AppCompatActivity implements
     private Button mQuantityIncreaseButton;
     private Button mQuantityDecreaseButton;
     private Button mCallSupplierButton;
+    private TextView mEditTitleView;
 
     //Boolean flag that keeps track of whether the book has been edited (true) or not (false)
     private boolean mBookHasChanged = false;
@@ -78,6 +80,10 @@ public class EditorActivity extends AppCompatActivity implements
         } else {
             //If the intent does have a book Uri then we are editing.
             setTitle(getString(R.string.editor_edit_label));
+
+            //Adjust the text blurb to say 'edit book'
+            mEditTitleView = findViewById(R.id.EditorTitle);
+            mEditTitleView.setText(getString(R.string.view_edit));
 
             // Initialize a loader to read the book data from the database
             // and display the current values in the editor
