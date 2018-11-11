@@ -24,8 +24,9 @@ public class InventoryDbHelper extends SQLiteOpenHelper {
         // Creates a string for the needed SQL create table statement
         //I had to make phone number a text because it says it is too big for int
         String SQL_CREATE_TABLE = "CREATE TABLE " + InventoryEntry.TABLE_NAME + " ("
-                + InventoryEntry.COLUMN_PRODUCT_NAME + " TEXT PRIMARY KEY, "
-                + InventoryEntry.COLUMN_PRICE + " INTEGER NOT NULL, "
+                + InventoryEntry._ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
+                + InventoryEntry.COLUMN_PRODUCT_NAME + " TEXT NOT NULL UNIQUE, "
+                + InventoryEntry.COLUMN_PRICE + " REAL NOT NULL, "
                 + InventoryEntry.COLUMN_QUANTITY + " INTEGER NOT NULL DEFAULT 0, "
                 + InventoryEntry.COLUMN_SUPPLIER_NAME + " TEXT NOT NULL, "
                 + InventoryEntry.COLUMN_SUPPLIER_PHONE + " TEXT NOT NULL);";

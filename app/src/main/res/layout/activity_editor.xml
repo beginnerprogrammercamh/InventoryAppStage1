@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="20dp"
+    tools:context=".EditorActivity">
+
+    <!-- Label -->
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/AddBook" />
+
+
+    <!-- Name field -->
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/edit_book_name"
+        android:hint="@string/book_name_hint"
+        android:inputType="textCapWords"
+        tools:text="@string/book_name_hint" />
+
+    <!-- Price field -->
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/edit_price"
+        android:hint="@string/price_hint"
+        android:inputType="numberDecimal"
+        android:maxLength="5"
+        tools:text="@string/price_hint" />
+
+    <!-- Quantity field -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/edit_quantity"
+        android:hint="@string/quantity_hint"
+        android:inputType="number"
+        android:maxLength="5"
+        tools:text="@string/quantity_hint" />
+
+        <Button
+            android:id="@+id/quantity_increase"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="-"/>
+
+        <Button
+            android:id="@+id/quantity_decrease"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="+"/>
+    </LinearLayout>
+
+    <!-- Supplier Name field -->
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/edit_supp_name"
+        android:hint="@string/supplier_hint"
+        android:inputType="text"
+        tools:text="@string/supplier_hint" />
+
+    <!-- Supplier Phone field -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/edit_supp_phone"
+        android:hint="@string/supp_phone_hint"
+        android:inputType="phone"
+        tools:text="@string/supp_phone_hint" />
+
+        <Button
+            android:id="@+id/call_supplier_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/call_supplier"/>
+    </LinearLayout>
+
+</LinearLayout>

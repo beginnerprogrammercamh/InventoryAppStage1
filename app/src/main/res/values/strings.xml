@@ -1,4 +1,65 @@
 <resources>
-    <string name="app_name">InventoryAppStage1</string>
-    <string name="insert_sample_data">Insert Sample Data</string>
+    <string name="app_name">Inventory App</string>
+    <string name="main_label">Inventory List</string>
+    <string name="editor_add_label">Add New Book</string>
+    <string name="editor_edit_label">Edit Book</string>
+
+    <string name="insert_sample_data">Insert Sample Book</string>
+    <string name="delete_all">Delete all entries</string>
+
+    <string name="new_insert_success">New book added.</string>
+    <string name="new_insert_failed">Failed to add new book.</string>
+    <string name="update_success">Book has been updated.</string>
+    <string name="update_failed">Book failed to update.</string>
+
+    <string name="action_save">Save</string>
+    <string name="action_delete">Delete</string>
+
+    <string name="book_name_hint">Book Name</string>
+    <string name="price_hint">Price</string>
+    <string name="quantity_hint">Quantity</string>
+    <string name="supplier_hint">Supplier Name</string>
+    <string name="supp_phone_hint">Supplier Phone Number</string>
+
+    <string name="sale_button">Sale</string>
+    <string name="quantity_intro">Quantity: </string>
+    <string name="price_intro">$ </string>
+
+    <!-- Title text for the empty view -->
+    <string name="empty_view_title_text">There are no books to show yet...</string>
+    <!-- Subtitle text for the empty view that prompts the user to add a book-->
+    <string name="empty_view_subtitle_text">Get started by adding a book below</string>
+
+    <!-- Dialog message when user is leaving editor but hasn't saved changes [CHAR LIMIT=NONE] -->
+    <string name="unsaved_changes_dialog_msg">Discard your changes and quit editing?</string>
+    <!-- Dialog button text for the option to discard a user's changes [CHAR LIMIT=20] -->
+    <string name="discard">Discard</string>
+    <!-- Dialog button text for the option to keep editing the current book [CHAR LIMIT=20] -->
+    <string name="keep_editing">Keep Editing</string>
+    <!-- Toast message in editor when current book was successfully deleted [CHAR LIMIT=NONE] -->
+    <string name="editor_delete_book_successful">Book deleted</string>
+
+    <!-- Toast message in editor when current book has failed to be deleted [CHAR LIMIT=NONE] -->
+    <string name="editor_delete_book_failed">Error with deleting book</string>
+
+    <!-- Dialog message to ask the user to confirm deleting the current book [CHAR LIMIT=NONE] -->
+    <string name="delete_dialog_msg">Delete this book?</string>
+
+    <!-- Dialog message to ask the user to confirm deleting the current book [CHAR LIMIT=NONE] -->
+    <string name="delete_ALL_dialog_msg">Delete ALL books listed?</string>
+
+    <!-- Dialog button text for the option to confirm deleting the current book [CHAR LIMIT=20] -->
+    <string name="delete">Delete</string>
+
+    <string name = "Out_of_Stock">Out of Stock</string>
+
+    <!-- Dialog button text for the option to cancel deletion of the current book [CHAR LIMIT=20] -->
+    <string name="cancel">Cancel</string>
+<string name="AddBook">Add a book</string>
+
+    <string name="sale_fail">Book cannot be sold if out of stock</string>
+    <string name="call_supplier">Call supplier</string>
+    <string name="quantity_update_success">Book sold, quantity updated</string>
+    <string name="quantity_update_error">Error updating quantity</string>
+
 </resources>

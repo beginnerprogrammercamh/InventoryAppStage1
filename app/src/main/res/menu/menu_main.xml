@@ -8,4 +8,9 @@
         android:id="@+id/action_insert_sample_data"
         android:title="@string/insert_sample_data"
         app:showAsAction="never" />
+
+    <item
+        android:id="@+id/action_delete_all"
+        android:title="@string/delete_all"
+        app:showAsAction="never" />
 </menu>
