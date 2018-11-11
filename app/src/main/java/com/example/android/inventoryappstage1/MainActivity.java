@@ -34,7 +34,7 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
         setContentView(R.layout.activity_main);
 
         // Setup FAB to open EditorActivity
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+        FloatingActionButton fab = findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -44,7 +44,7 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
         });
 
         // Find the ListView which will be populated with the inventory data
-        ListView inventoryListView = (ListView) findViewById(R.id.list);
+        ListView inventoryListView = findViewById(R.id.list);
 
         // Find and set empty view on the ListView, so that it only shows when the list has 0 items.
         View emptyView = findViewById(R.id.empty_view);
@@ -77,6 +77,10 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
         getLoaderManager().initLoader(INVENTORY_LOADER, null, this);
     }
 
+    @Override
+    protected void onStart() {
+        super.onStart();
+    }
 
     //Insert method to put new sample data into the database for debugging purposes
     private void insertBook() {
@@ -93,7 +97,7 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
     }
 
     /**
-     * Helper method to delete all pets in the database.
+     * Helper method to delete all books in the database.
      */
     private void deleteAll() {
         int rowsDeleted = getContentResolver().delete(InventoryEntry.CONTENT_URI, null, null);
@@ -160,12 +164,8 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
                 InventoryEntry.COLUMN_QUANTITY};
 
         // This loader will execute the ContentProvider's query method on a background thread
-        return new CursorLoader(this,   // Parent activity context
-                InventoryEntry.CONTENT_URI,   // Provider content URI to query
-                projection,             // Columns to include in the resulting Cursor
-                null,                   // No selection clause
-                null,                   // No selection arguments
-                null);                  // Default sort order
+        return new CursorLoader(this, InventoryEntry.CONTENT_URI, projection,
+                null, null, null);
     }
 
     @Override

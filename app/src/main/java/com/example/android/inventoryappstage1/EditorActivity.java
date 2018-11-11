@@ -17,6 +17,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
@@ -42,6 +43,9 @@ public class EditorActivity extends AppCompatActivity implements
     private EditText mQuantityEditText;
     private EditText mSupplierEditText;
     private EditText mSuppPhoneEditText;
+    private Button mQuantityIncreaseButton;
+    private Button mQuantityDecreaseButton;
+    private Button mCallSupplierButton;
 
     //Boolean flag that keeps track of whether the book has been edited (true) or not (false)
     private boolean mBookHasChanged = false;
@@ -85,6 +89,9 @@ public class EditorActivity extends AppCompatActivity implements
         mQuantityEditText = findViewById(R.id.edit_quantity);
         mSupplierEditText = findViewById(R.id.edit_supp_name);
         mSuppPhoneEditText = findViewById(R.id.edit_supp_phone);
+        mQuantityIncreaseButton = findViewById(R.id.quantity_increase);
+        mQuantityDecreaseButton = findViewById(R.id.quantity_decrease);
+        mCallSupplierButton = findViewById(R.id.call_supplier_button);
 
         // Setup OnTouchListeners on all the input fields, so we can determine if the user
         // has touched or modified them. This will let us know if there are unsaved changes
@@ -94,6 +101,34 @@ public class EditorActivity extends AppCompatActivity implements
         mQuantityEditText.setOnTouchListener(mTouchListener);
         mSupplierEditText.setOnTouchListener(mTouchListener);
         mSuppPhoneEditText.setOnTouchListener(mTouchListener);
+        mQuantityIncreaseButton.setOnTouchListener(mTouchListener);
+        mQuantityDecreaseButton.setOnTouchListener(mTouchListener);
+
+        mQuantityIncreaseButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                setStringQuantity("add");
+            }
+        });
+
+        mQuantityDecreaseButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                setStringQuantity("minus");
+            }
+        });
+
+
+        mCallSupplierButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(Intent.ACTION_DIAL);
+                intent.setData(Uri.parse("tel:" + mSuppPhoneEditText.getText().toString()));
+                if (intent.resolveActivity(getPackageManager()) != null) {
+                    startActivity(intent);
+                }
+            }
+        });
     }
 
     //Get user input and save new book into database
@@ -102,13 +137,11 @@ public class EditorActivity extends AppCompatActivity implements
         // Use trim to eliminate leading or trailing white space
         String nameString = mNameEditText.getText().toString().trim();
         String priceString = mPriceEditText.getText().toString().trim();
-        float price = Float.parseFloat(priceString);
         String quantityString = mQuantityEditText.getText().toString().trim();
-        int quantity = Integer.parseInt(quantityString);
         String supplierString = mSupplierEditText.getText().toString().trim();
-        String suppPhoneString = mSuppPhoneEditText.getText().toString().trim();
+        String suppPhoneString = mSuppPhoneEditText.getText().toString().trim().replaceAll("[^\\d]", "");
 
-// Check if this is supposed to be a new pet
+        // Check if this is supposed to be a new pet
         // and check if all the fields in the editor are blank
         if (mCurrentInventoryUri == null &&
                 TextUtils.isEmpty(nameString) && TextUtils.isEmpty(priceString) &&
@@ -118,6 +151,16 @@ public class EditorActivity extends AppCompatActivity implements
             // No need to create ContentValues and no need to do any ContentProvider operations.
             return;
         }
+        //if any fields are left blank or are invalid, show toast saying fields required, don't save to database
+        if (mCurrentInventoryUri == null && TextUtils.isEmpty(nameString) || TextUtils.isEmpty(priceString) ||
+                TextUtils.isEmpty(quantityString) || TextUtils.isEmpty(supplierString) ||
+                TextUtils.isEmpty(suppPhoneString) || suppPhoneString.length() != 10) {
+            Toast.makeText(this, R.string.required_field, Toast.LENGTH_LONG).show();
+            return;
+        }
+
+        float price = Float.parseFloat(priceString);
+        int quantity = Integer.parseInt(quantityString);
 
         //Create a ContentValues object where the column names are the keys and the
         // book attributes from the editor are the values.
@@ -207,7 +250,6 @@ public class EditorActivity extends AppCompatActivity implements
                     NavUtils.navigateUpFromSameTask(EditorActivity.this);
                     return true;
                 }
-
                 // Otherwise if there are unsaved changes, setup a dialog to warn the user.
                 // Create a click listener to handle the user confirming that
                 // changes should be discarded.
@@ -386,5 +428,28 @@ public class EditorActivity extends AppCompatActivity implements
         }
         // Close the activity
         finish();
+    }
+
+    //method to update the quantity in the EditText view
+    private void setStringQuantity(String method) {
+        String stringQuantity = mQuantityEditText.getText().toString();
+        int currentQuantity;
+        if (TextUtils.isEmpty(stringQuantity)) {
+            currentQuantity = 0;
+        } else {
+            currentQuantity = Integer.parseInt(stringQuantity);
+        }
+
+        switch (method) {
+            case "add":
+                currentQuantity++;
+                break;
+            case "minus":
+                if (currentQuantity != 0) {
+                    currentQuantity--;
+                }
+                break;
+        }
+        mQuantityEditText.setText(String.valueOf(currentQuantity));
     }
 }

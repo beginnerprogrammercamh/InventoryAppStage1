@@ -59,12 +59,7 @@ public class InventoryProvider extends ContentProvider {
                 // projection, selection, selection arguments, and sort order. The cursor
                 // could contain multiple rows of the books table.
                 cursor = database.query(InventoryContract.InventoryEntry.TABLE_NAME,
-                        projection,
-                        selection,
-                        selectionArgs,
-                        null,
-                        null,
-                        sortOrder);
+                        projection, selection, selectionArgs, null, null, sortOrder);
                 break;
             case BOOK_ID:
                 // For the BOOK_ID code, extract out the ID from the URI.
@@ -111,7 +106,7 @@ public class InventoryProvider extends ContentProvider {
         Float price = values.getAsFloat(InventoryContract.InventoryEntry.COLUMN_PRICE);
         if (price == null) {
             throw new IllegalArgumentException("Price must be entered.");
-        } else if (price != null && price < 0) {
+        } else if (price < 0) {
             throw new IllegalArgumentException("Price must be greater than 0.");
         }
 
@@ -119,7 +114,7 @@ public class InventoryProvider extends ContentProvider {
         Integer quantity = values.getAsInteger(InventoryContract.InventoryEntry.COLUMN_QUANTITY);
         if (quantity == null) {
             throw new IllegalArgumentException("Quantity must be entered.");
-        } else if (quantity != null && quantity < 0) {
+        } else if (quantity < 0) {
             throw new IllegalArgumentException("Quantity can not be negative.");
         }
 
@@ -182,7 +177,7 @@ public class InventoryProvider extends ContentProvider {
             Float price = values.getAsFloat(InventoryContract.InventoryEntry.COLUMN_PRICE);
             if (price == null) {
                 throw new IllegalArgumentException("Price must be entered.");
-            } else if (price != null && price < 0) {
+            } else if (price < 0) {
                 throw new IllegalArgumentException("Price must be greater than 0.");
             }
         }
@@ -192,7 +187,7 @@ public class InventoryProvider extends ContentProvider {
             Integer quantity = values.getAsInteger(InventoryContract.InventoryEntry.COLUMN_QUANTITY);
             if (quantity == null) {
                 throw new IllegalArgumentException("Quantity must be entered.");
-            } else if (quantity != null && quantity < 0) {
+            } else if (quantity < 0) {
                 throw new IllegalArgumentException("Quantity can not be negative.");
             }
         }

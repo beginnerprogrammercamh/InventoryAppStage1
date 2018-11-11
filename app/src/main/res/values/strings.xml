@@ -26,7 +26,7 @@
     <string name="price_intro">$ </string>
 
     <!-- Title text for the empty view -->
-    <string name="empty_view_title_text">There are no books to show yet...</string>
+    <string name="empty_view_title_text">There are no books to show yet…</string>
     <!-- Subtitle text for the empty view that prompts the user to add a book-->
     <string name="empty_view_subtitle_text">Get started by adding a book below</string>
 
@@ -61,5 +61,6 @@
     <string name="call_supplier">Call supplier</string>
     <string name="quantity_update_success">Book sold, quantity updated</string>
     <string name="quantity_update_error">Error updating quantity</string>
+    <string name="required_field">All fields are required. Phone number needs 10 digits.</string>
 
 </resources>

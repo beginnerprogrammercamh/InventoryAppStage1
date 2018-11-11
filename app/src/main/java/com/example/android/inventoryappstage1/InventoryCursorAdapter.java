@@ -53,7 +53,7 @@ public class InventoryCursorAdapter extends CursorAdapter {
         // Read the attributes from the Cursor for the current item
         String bookName = cursor.getString(nameColumnIndex);
         Float bookPrice = cursor.getFloat(priceColumnIndex);
-        Integer bookQuantity = cursor.getInt(quantityColumnIndex);
+        final Integer bookQuantity = cursor.getInt(quantityColumnIndex);
         int id = cursor.getInt(idColumnIndex);
 
         // Update the TextViews with the attributes for the current item
@@ -72,12 +72,10 @@ public class InventoryCursorAdapter extends CursorAdapter {
         saleButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
                 //get current quantity from TextView
-                int updateQuantity = Integer.parseInt(quantityTextView.getText().toString().trim());
-                if (updateQuantity ==0) {
+                int updateQuantity = bookQuantity;
+                if (updateQuantity == 0) {
                     Toast.makeText(context, R.string.sale_fail, Toast.LENGTH_SHORT).show();
-                    return;
                 } else {
                     updateQuantity -= 1;
                     quantityTextView.setText(Integer.toString(updateQuantity));
